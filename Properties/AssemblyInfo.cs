@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DotNancyTemplate")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A template for a web application utilizing the NancyFX framework and DotNORM.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Alex Vorobiev")]
 [assembly: AssemblyProduct("DotNancyTemplate")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCopyright("Copyright © Alex Vorobiev 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

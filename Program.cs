@@ -5,7 +5,10 @@
     using System.Threading;
     using Nancy;
     using Nancy.Hosting.Self;
-
+    
+    /// <summary>
+    /// The main injection point of the application.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)

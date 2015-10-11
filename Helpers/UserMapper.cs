@@ -8,31 +8,48 @@
     using Nancy.Authentication.Forms;
     using Nancy.Security;
 
-    class UserMapper : IUserMapper
+    /// <summary>
+    /// The user mapper handles user authentication
+    /// </summary>
+    public class UserMapper : IUserMapper
     {
-        private static List<Tuple<string, string, Guid>> users = new List<Tuple<string, string, Guid>>();
-
-        static UserMapper()
-        {
-            users.Add(new Tuple<string, string, Guid>("admin", "password", new Guid("55E1E49E-B7E8-4EEA-8459-7A906AC4D4C0")));
-            users.Add(new Tuple<string, string, Guid>("user", "password", new Guid("56E1E49E-B7E8-4EEA-8459-7A906AC4D4C1")));
-        }
-
+        /// <summary>
+        /// Get the real username from an identifier
+        /// </summary>
+        /// <param name="identifier">User identifier</param><param name="context">The current NancyFx context</param>
+        /// <returns>
+        /// Matching populated IUserIdentity object, or empty
+        /// </returns>
         public IUserIdentity GetUserFromIdentifier(Guid identifier, NancyContext context)
         {
-            var userRecord = users.FirstOrDefault(u => u.Item3 == identifier);
+            var userRecord = User.Find(identifier);
 
-            return userRecord == null ? null : new User { UserName = userRecord.Item1 };
+            return userRecord ?? null;
 
         }
 
+        /// <summary>
+        /// Validates the user and if correctly validated returns the user's Id
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns></returns>
         public static Guid? ValidateUser(string username, string password)
         {
-            var userRecord = users.Where(u => u.Item1 == username && u.Item2 == password).FirstOrDefault();
+            var userRecord = User.All().FirstOrDefault(u => u.UserName == username || u.Email == username);
+
+            if(userRecord != null)
+            {
+                userRecord.Password = password;
+                if(!userRecord.Authenticate())
+                {
+                    return null;
+                }
+            }
 
             if (userRecord == null) return null;
 
-            return userRecord.Item3;
+            return userRecord.Id;
         }
     }
 }

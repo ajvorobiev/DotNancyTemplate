@@ -11,33 +11,36 @@
 
         public BaseModule()
         {
-            SetupModelDefaults();
+            this.SetupModelDefaults();
         }
 
         public BaseModule(string modulepath)
             : base(modulepath)
         {
-            SetupModelDefaults();
+            this.SetupModelDefaults();
         }
 
         private void SetupModelDefaults()
         {
-            Before.AddItemToEndOfPipeline(ctx =>
+            this.Before.AddItemToEndOfPipeline(ctx =>
             {
-                Model.MasterPage = new MasterPageModel();
-                Model.MasterPage.Title = "MyNancy - Hello World!";
-                if (Request.Cookies.ContainsKey("lastvisit"))
+                this.Model.MasterPage = new MasterPageModel();
+                this.Model.MasterPage.Title = "MyNancy - Hello World!";
+
+                if (this.Request.Cookies.ContainsKey("lastvisit"))
                 {
-                    Model.MasterPage.LastVisit = Uri.UnescapeDataString(Request.Cookies["lastvisit"]);
+                    this.Model.MasterPage.LastVisit = Uri.UnescapeDataString(this.Request.Cookies["lastvisit"]);
                 }
                 else
                 {
-                    Model.MasterPage.LastVisit = "No cookie value yet";
+                    this.Model.MasterPage.LastVisit = "No cookie value yet";
                 }
-                Model.MasterPage.IsAuthenticated = (ctx.CurrentUser == null);
+
+                this.Model.MasterPage.IsAuthenticated = (ctx.CurrentUser == null);
                 return null;
             });
-            After.AddItemToEndOfPipeline(ctx =>
+
+            this.After.AddItemToEndOfPipeline(ctx =>
             {
                 var now = DateTime.Now;
                 ctx.Response.WithCookie("lastvisit", now.ToShortDateString() + " " + now.ToShortTimeString(), now.AddYears(1));

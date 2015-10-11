@@ -10,26 +10,26 @@
     {
         public MainModule()
         {
-            Get["/"] = x =>
+            this.Get["/"] = x =>
             {
-                Model.index = new IndexModel();
-                Model.index.HelloWorld = "HelloWorld!";
-                return View["Index", Model];
+                this.Model.index = new IndexModel();
+                this.Model.index.HelloWorld = "HelloWorld!";
+                return this.View["Index", this.Model];
             };
 
-            Get["/login"] = x =>
+            this.Get["/login"] = x =>
             {
-                Model.login = new LoginModel() { Error = this.Request.Query.error.HasValue, ReturnUrl = this.Request.Url };
-                return View["Login", Model];
+                this.Model.login = new LoginModel() { Error = this.Request.Query.error.HasValue, ReturnUrl = this.Request.Url };
+                return this.View["Login", this.Model];
             };
 
-            Post["/login"] = x =>
+            this.Post["/login"] = x =>
             {
                 var userGuid = UserMapper.ValidateUser((string)this.Request.Form.Username, (string)this.Request.Form.Password);
 
                 if (userGuid == null)
                 {
-                    return Context.GetRedirect("~/login?error=true&username=" + (string)this.Request.Form.Username);
+                    return this.Context.GetRedirect("~/login?error=true&username=" + (string)this.Request.Form.Username);
                 }
 
                 DateTime? expiry = null;
@@ -40,7 +40,8 @@
 
                 return this.LoginAndRedirect(userGuid.Value, expiry);
             };
-            Post["/logout"] = x =>
+
+            this.Post["/logout"] = x =>
             {
                 return this.LogoutAndRedirect("/");
             };

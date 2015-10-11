@@ -49,6 +49,10 @@
       <HintPath>packages\Nancy.Hosting.Self.1.3.0\lib\net40\Nancy.Hosting.Self.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>packages\NLog.4.1.2\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Npgsql, Version=3.0.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>packages\Npgsql.3.0.0\lib\net45\Npgsql.dll</HintPath>
       <Private>True</Private>
@@ -66,8 +70,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Entities\Claim.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\Usergroup.cs" />
+    <Compile Include="Helpers\AppSettingsManager.cs" />
+    <Compile Include="Helpers\Encoder.cs" />
     <Compile Include="Helpers\UserMapper.cs" />
+    <Compile Include="Migrations\20151011182648_0_ 0_ 0_CreateMigrationTable.cs" />
+    <Compile Include="Migrations\20151011182650_1_ 0_ 0_CreateUsersTable.cs" />
     <Compile Include="Models\Admin\IndexModel.cs" />
     <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -99,6 +109,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="LICENSE" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="README.md" />
     <None Include="Scripts\jquery-1.9.1.min.map" />
