@@ -8,7 +8,7 @@
         public AdminModule() : base("/admin")
         {
             this.RequiresAuthentication();
-            this.RequiresClaims(new[] { "AdministrationPanel" });
+            this.RequiresClaims(new[] { "AdminOverview" });
 
             this.Get["/"] = x =>
             {

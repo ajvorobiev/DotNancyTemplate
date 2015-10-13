@@ -19,7 +19,7 @@
 
             this.Get["/login"] = x =>
             {
-                this.Model.login = new LoginModel() { Error = this.Request.Query.error.HasValue, ReturnUrl = this.Request.Url };
+                this.Model.login = new LoginModel() { Errored = this.Request.Query.error.HasValue, ReturnUrl = this.Request.Url };
                 return this.View["Login", this.Model];
             };
 
@@ -38,10 +38,15 @@
                     expiry = DateTime.Now.AddDays(7);
                 }
 
-                return this.LoginAndRedirect(userGuid.Value, expiry);
+                return this.LoginAndRedirect(userGuid.Value, expiry, "/admin");
             };
 
             this.Post["/logout"] = x =>
+            {
+                return this.LogoutAndRedirect("/");
+            };
+
+            this.Get["/logout"] = x =>
             {
                 return this.LogoutAndRedirect("/");
             };

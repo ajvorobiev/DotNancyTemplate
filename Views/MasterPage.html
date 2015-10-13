@@ -3,23 +3,41 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>@Model.MasterPage.Title</title>
-    <link rel="stylesheet" type="text/css" href="/Content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/bootstrap.min.css"/>
     @Section['Scripts']
 </head>
 <body>
-    <section>
-        <div id="content">
-            <h1>Last visit: @Model.MasterPage.LastVisit</h1>
-            @If.MasterPage.IsAuthenticated
-            <a href="/login">Login</a>
-            @EndIf
-            @IfNot.MasterPage.IsAuthenticated
-            <form id="logoutform" method="post" action="/logout">
-                <input type=submit value="Logout" />
-            </form>
-            @EndIf
-            @Section['Content']
+
+    <div class="masthead clearfix">
+        <div class="inner">
+            <h3 class="masthead-brand">@Model.MasterPage.AppTitle</h3>
+            <nav>
+                <ul class="nav masthead-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li>
+                        @If.MasterPage.IsAuthenticated
+                        <a href="/login">Login</a>
+                        @EndIf
+                        @IfNot.MasterPage.IsAuthenticated
+                        <form id="logoutform" method="post" action="/logout">
+                            <input type=submit value="Logout" />
+                        </form>
+                        @EndIf
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </section>
+    </div>
+
+
+<div class="container">
+    @Section['Content']
+</div>
+
+<div class="mastfoot">
+    <div class="inner">
+        <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+    </div>
+</div>
 </body>
 </html>

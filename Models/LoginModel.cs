@@ -4,7 +4,7 @@
 
     public class LoginModel
     {
-        public bool Error { get; set; }
+        public bool Errored { get; set; }
         public Url ReturnUrl { get; set; }
     }
 }

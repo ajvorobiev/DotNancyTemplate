@@ -2,6 +2,7 @@
 {
     using System;
     using System.Dynamic;
+    using Helpers;
     using Models;
     using Nancy;
 
@@ -25,7 +26,11 @@
             this.Before.AddItemToEndOfPipeline(ctx =>
             {
                 this.Model.MasterPage = new MasterPageModel();
-                this.Model.MasterPage.Title = "MyNancy - Hello World!";
+
+                var appTitle = AppSettingsManager.ReadSetting("appname");
+
+                this.Model.MasterPage.Title = appTitle;
+                this.Model.MasterPage.AppTitle = appTitle;
 
                 if (this.Request.Cookies.ContainsKey("lastvisit"))
                 {

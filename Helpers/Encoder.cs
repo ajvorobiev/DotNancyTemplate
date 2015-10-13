@@ -19,6 +19,7 @@
         /// <returns>The encoded string.</returns>
         public static string EncodeUserPassword(User user)
         {
+            // The password is salted with the user's registration date
             var saltBytes = GetBytes(user.DateRegistered.ToLongDateString());
             return ComputeHash(user.Password, DefaultAlgorythm, saltBytes);
         }
