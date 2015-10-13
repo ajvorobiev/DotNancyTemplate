@@ -1,5 +1,6 @@
 ﻿namespace DotNancyTemplate
 {
+    using System;
     using System.Net.Http;
     using DotNORM.Database;
     using DotNORM.MigrationEngine;
@@ -8,12 +9,15 @@
     using Nancy.Authentication.Forms;
     using Nancy.Bootstrapper;
     using Nancy.TinyIoc;
+    using NLog;
 
     /// <summary>
     /// The bootsrapper initializes all containers and authentication.
     /// </summary>
     public class Bootstrapper : DefaultNancyBootstrapper
     {
+        private static Logger Logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Configure the request container
         /// </summary>
@@ -37,6 +41,17 @@
             this.SetupDatabaseConnection();
 
             base.ApplicationStartup(container, pipelines);
+
+            StaticConfiguration.EnableRequestTracing = true;
+
+            pipelines.OnError += (ctx, ex) =>
+            {
+                Logger.Trace(ex, "On error message was triggered: {0}", ex.Message);
+                return null;
+            };
+
+            SetUpTrackingCodes();
+
             var formsAuthConfiguration =
                 new FormsAuthenticationConfiguration()
                 {
@@ -45,8 +60,16 @@
                 };
 
             FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
+            
         }
 
+        private static void SetUpTrackingCodes()
+        {
+            // Add error codes for tracking
+            StatusCodeHandler.AddCode(404);
+            StatusCodeHandler.AddCode(500);
+        }
+        
         /// <summary>
         /// Sets up the database connection and migration engine
         /// </summary>
@@ -58,9 +81,9 @@
             try
             {
                 // Create the connection.
-                DatabaseSession.Instance.CreateConnector(settings["dbhost"], settings["dbport"], settings["dbname"], settings["dbuser"], settings["dbpassword"], ConnectorType.Postgresql);
+                DatabaseSession.Instance.CreateConnector(settings["dbhost"], settings["dbport"], settings["dbname"], settings["dbuser"], settings["dbpassword"]);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 throw new HttpRequestException(string.Format("The connection to database could not be made: {0}", ex.Message));
             }

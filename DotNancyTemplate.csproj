@@ -53,8 +53,8 @@
       <HintPath>packages\NLog.4.1.2\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Npgsql, Version=3.0.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>packages\Npgsql.3.0.0\lib\net45\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql, Version=3.0.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>packages\Npgsql.3.0.3\lib\net45\Npgsql.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -75,11 +75,13 @@
     <Compile Include="Entities\Usergroup.cs" />
     <Compile Include="Helpers\AppSettingsManager.cs" />
     <Compile Include="Helpers\Encoder.cs" />
+    <Compile Include="Helpers\StatusCodeHandler.cs" />
     <Compile Include="Helpers\UserMapper.cs" />
     <Compile Include="Migrations\20151011182648_0_ 0_ 0_CreateMigrationTable.cs" />
     <Compile Include="Migrations\20151011182650_1_ 0_ 0_CreateUsersTable.cs" />
     <Compile Include="Models\Admin\IndexModel.cs" />
     <Compile Include="Models\Admin\UsersModel.cs" />
+    <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MasterPageModel.cs" />
@@ -122,7 +124,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="README.md" />
-    <None Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Scripts\jquery-2.1.4.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css">
@@ -142,9 +144,9 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Views\admin\Index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -152,6 +154,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\admin\Users.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Codes\Error.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Index.html">
