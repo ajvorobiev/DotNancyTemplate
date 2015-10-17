@@ -80,6 +80,7 @@
     <Compile Include="Migrations\20151011182648_0_ 0_ 0_CreateMigrationTable.cs" />
     <Compile Include="Migrations\20151011182650_1_ 0_ 0_CreateUsersTable.cs" />
     <Compile Include="Models\Admin\IndexModel.cs" />
+    <Compile Include="Models\Admin\UserModel.cs" />
     <Compile Include="Models\Admin\UsersModel.cs" />
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\IndexModel.cs" />
@@ -151,6 +152,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\admin\AdminMasterPage.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\admin\User.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\admin\Users.html">

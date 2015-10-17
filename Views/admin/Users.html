@@ -10,14 +10,16 @@
         <th>Username</th>
         <th>Email</th>
         <th>Date Registered</th>
+        <th>Group</th>
     </tr>
     <thead>
     <tbody>
         @Each.Users.AllUsers
         <tr>
-            <td>@Current.UserName</td>
+            <td><a href="/admin/users/@Current.Id">@Current.UserName</a></td>
             <td>@Current.Email</td>
             <td>@Current.DateRegistered</td>
+            <td><a href="/admin/usergroups/@Current.Usergroup.Id">@Current.Usergroup.Name</a></td>
         </tr>
         @EndEach
     </tbody>

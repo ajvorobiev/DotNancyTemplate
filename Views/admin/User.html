@@ -1,0 +1,31 @@
+﻿@Master['AdminMasterPage']
+@Section['Scripts']
+@EndSection
+@Section['Content']
+<h1>User: @Model.User.UserName</h1>
+
+<table class="table table-hover">
+    <tbody>
+    <tr>
+        <td>Username:</td>
+        <td>@Model.User.UserName</td>
+    </tr>
+    <tr>
+        <td>Id:</td>
+        <td>@Model.User.Id</td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td>@Model.User.Email</td>
+    </tr>
+    <tr>
+        <td>Date Registered:</td>
+        <td>@Model.User.DateRegistered</td>
+    </tr>
+    <tr>
+        <td>Usergroup:</td>
+        <td><a href="/admin/usergroups/@Model.User.Usergroup.Id">@Model.User.Usergroup.Name</a></td>
+    </tr>
+    </tbody>
+</table>
+@EndSection

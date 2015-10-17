@@ -56,6 +56,12 @@
         public Guid UsergroupId { get; set; }
 
         /// <summary>
+        /// Gets the <see cref="Usergroup"/> that this person has assigned.
+        /// </summary>
+        [IgnoreDataMember]
+        public Usergroup Usergroup { get { return this.GetUsergroup(); } }
+
+        /// <summary>
         /// The date that this user registered
         /// </summary>
         public DateTime DateRegistered { get; set; }
@@ -90,9 +96,18 @@
         {
             // get all the claims
             var allClaims = Claim.All();
-            var usergroup = Usergroup.Find(this.UsergroupId);
+            var usergroup = this.GetUsergroup();
 
             return usergroup.Claims.Select(claimId => allClaims.First(c => c.Id.Equals(claimId)).Name);
-        } 
+        }
+
+        /// <summary>
+        /// Gets the <see cref="Usergroup"/> assigned to this user.
+        /// </summary>
+        /// <returns>The <see cref="Usergroup"/> assigned.</returns>
+        private Usergroup GetUsergroup()
+        {
+            return Usergroup.Find(this.UsergroupId);
+        }
     }
 }

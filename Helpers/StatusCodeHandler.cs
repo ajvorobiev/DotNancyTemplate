@@ -41,6 +41,8 @@
         /// <returns>True if the status code is tracked.</returns>
         public bool HandlesStatusCode(HttpStatusCode statusCode, NancyContext context)
         {
+            if(bool.Parse(AppSettingsManager.ReadSetting("debugmode"))) return false;
+
             return (_checks.Any(x => x == (int)statusCode));
         }
 
