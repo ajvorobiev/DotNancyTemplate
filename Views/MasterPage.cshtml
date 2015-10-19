@@ -1,10 +1,11 @@
-﻿<!DOCTYPE HTML>
+﻿@using Nancy.ViewEngines
+<!DOCTYPE HTML>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>@Model.MasterPage.Title</title>
     <link rel="stylesheet" type="text/css" href="/Content/bootstrap.min.css"/>
-    @Section['Scripts']
+    @RenderSection("Scripts", required: false)
 </head>
 <body>
 
@@ -31,7 +32,7 @@
 
 
 <div class="container">
-    @Section['Content']
+    @RenderBody()
 </div>
 
 <div class="mastfoot">
