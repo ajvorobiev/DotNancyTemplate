@@ -1,4 +1,10 @@
-﻿<h1>User: @Model.User.UserName</h1>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+@{
+    Layout = "AdminMasterPage.cshtml";
+}
+
+<h1>User: @Model.User.UserName</h1>
 
 <table class="table table-hover">
     <tbody>

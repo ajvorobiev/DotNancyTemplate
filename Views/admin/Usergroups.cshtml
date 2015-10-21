@@ -1,0 +1,46 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+    @{
+    Layout = "AdminMasterPage.cshtml";
+    }
+
+
+    <h1>Usergroups</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Claims</th>
+            </tr>
+        <thead>
+        <tbody>
+            @foreach(var group in Model.Usergroups.AllGroups)
+            {
+            <tr>
+                <td><a href="/admin/usergroups/@group.Id">@group.Name</a></td>
+                <td>@group.ClaimsList</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    
+    <h1>Claims Overview</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        <thead>
+        <tbody>
+            @foreach(var claim in Model.Usergroups.AllClaims)
+            {
+            <tr>
+                <td>@claim.Name</td>
+                <td>@claim.Description</td>
+            </tr>
+            }
+        </tbody>
+    </table>

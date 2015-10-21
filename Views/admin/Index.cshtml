@@ -1,6 +1,7 @@
-﻿@section Scripts
-{
-    <script src="@Path['~/Content/myscript.js'];" type="text/javascript"></script>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+@{
+    Layout = "AdminMasterPage.cshtml";
 }
+
 
 <h1>Hello @Model.Index.UserName!</h1>

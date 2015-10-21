@@ -1,4 +1,6 @@
-﻿@using Nancy.ViewEngines
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+@using Nancy.ViewEngines
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -16,14 +18,16 @@
                 <ul class="nav masthead-nav">
                     <li class="active"><a href="/">Home</a></li>
                     <li>
-                        @If.MasterPage.IsAuthenticated
-                        <a href="/login">Login</a>
-                        @EndIf
-                        @IfNot.MasterPage.IsAuthenticated
-                        <form id="logoutform" method="post" action="/logout">
-                            <input type=submit value="Logout" />
-                        </form>
-                        @EndIf
+                        @if (Model.MasterPage.IsAuthenticated)
+                        { 
+                            <a href="/login">Login</a>
+                        }
+                        @if(!Model.MasterPage.IsAuthenticated)
+                        {
+                            <form id="logoutform" method="post" action="/logout">
+                                <input type=submit value="Logout"/>
+                            </form>
+                        }
                     </li>
                 </ul>
             </nav>

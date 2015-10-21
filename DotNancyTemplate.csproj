@@ -89,6 +89,7 @@
     <Compile Include="Migrations\20151011182648_0_ 0_ 0_CreateMigrationTable.cs" />
     <Compile Include="Migrations\20151011182650_1_ 0_ 0_CreateUsersTable.cs" />
     <Compile Include="Models\Admin\IndexModel.cs" />
+    <Compile Include="Models\Admin\UsergroupsModel.cs" />
     <Compile Include="Models\Admin\UserModel.cs" />
     <Compile Include="Models\Admin\UsersModel.cs" />
     <Compile Include="Models\ErrorModel.cs" />
@@ -98,11 +99,18 @@
     <Compile Include="Modules\AdminModule.cs" />
     <Compile Include="Modules\BaseModule.cs" />
     <Compile Include="Modules\MainModule.cs" />
+    <Compile Include="Modules\UsergroupsModule.cs" />
     <Compile Include="Modules\UsersModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Views\admin\User.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\admin\Usergroups.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="App.config" />
     <None Include="Content\bootstrap-theme.css.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -163,7 +171,7 @@
     <None Include="Views\admin\AdminMasterPage.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Views\admin\User.cshtml">
+    <None Include="Views\admin\Usergroup.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Views\admin\Users.cshtml">

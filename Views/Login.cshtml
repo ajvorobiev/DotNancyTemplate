@@ -1,4 +1,6 @@
-﻿<!DOCTYPE HTML>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+<!DOCTYPE HTML>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,9 +17,10 @@
                         </div>
                         <div class="panel-body">
 
-                            @If.Model.login.Errored
-                            <div class="alert alert-danger" role="alert" style="padding: 10px; margin-bottom: 5px;">Invalid Username or Password</div>
-                            @EndIf
+                            @if(Model.login.Errored)
+                            {
+                                <div class="alert alert-danger" role="alert" style="padding: 10px; margin-bottom: 5px;">Invalid Username or Password</div>
+                            }
 
                             <form method="POST">
                                 <div class="form-group">

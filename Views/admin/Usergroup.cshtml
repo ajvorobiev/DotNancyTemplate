@@ -1,0 +1,24 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+@{
+    Layout = "AdminMasterPage.cshtml";
+}
+
+<h1>Usergroup: @Model.Usergroup.Name</h1>
+
+<table class="table table-hover">
+    <tbody>
+    <tr>
+        <td>Usergroup:</td>
+        <td>@Model.Usergroup.Name</td>
+    </tr>
+    <tr>
+        <td>Id:</td>
+        <td>@Model.Usergroup.Id</td>
+    </tr>
+    <tr>
+        <td>Claims:</td>
+        <td>@Model.Usergroup.ClaimsList</td>
+    </tr>
+    </tbody>
+</table>

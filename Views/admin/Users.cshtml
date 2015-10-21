@@ -1,4 +1,12 @@
-﻿<h1>Users</h1>
+﻿
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+@{
+    Layout = "AdminMasterPage.cshtml";
+}
+
+
+<h1>Users</h1>
 
 <table class="table table-hover">
     <thead>
@@ -10,14 +18,15 @@
     </tr>
     <thead>
     <tbody>
-        @Each.Users.AllUsers
-        <tr>
-            <td><a href="/admin/users/@Current.Id">@Current.UserName</a></td>
-            <td>@Current.Email</td>
-            <td>@Current.DateRegistered</td>
-            <td><a href="/admin/usergroups/@Current.Usergroup.Id">@Current.Usergroup.Name</a></td>
-        </tr>
-        @EndEach
+        @foreach(var user in Model.Users.AllUsers)
+        {
+            <tr>
+                <td><a href="/admin/users/@user.Id">@user.UserName</a></td>
+                <td>@user.Email</td>
+                <td>@user.DateRegistered</td>
+                <td><a href="/admin/usergroups/@user.Usergroup.Id">@user.Usergroup.Name</a></td>
+            </tr>
+        }
     </tbody>
 
 </table>

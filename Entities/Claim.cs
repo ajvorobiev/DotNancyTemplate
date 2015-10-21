@@ -17,5 +17,10 @@
         /// The name of the claim.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Describes the point of the <see cref="Claim"/> and what it allows to do.
+        /// </summary>
+        public string Description { get; set; }
     }
 }
