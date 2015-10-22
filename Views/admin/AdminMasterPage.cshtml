@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>@Model.MasterPage.Title</title>
     <link rel="stylesheet" type="text/css" href="/Content/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/Content/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="/Content/dashboard.css" />
     @RenderSection("Scripts", required: false) 
 </head>
@@ -43,15 +44,16 @@
                 <li><a href="/admin">Overview</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="/admin/users">Users</a></li>
-                <li><a href="/admin/usergroups">Usergroups</a></li>
+                <li><a href="/admin/users"><i class="fa fa-user"></i>&nbsp;Users</a></li>
+                <li><a href="/admin/usergroups"><i class="fa fa-users"></i>&nbsp;Usergroups</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             @RenderBody()
         </div>
     </div>
-    
+
 </div>
+@RenderSection("EndScripts", required: false)
 </body>
 </html>
