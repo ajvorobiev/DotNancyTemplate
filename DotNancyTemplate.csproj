@@ -83,6 +83,7 @@
     <Compile Include="Entities\Usergroup.cs" />
     <Compile Include="Helpers\AppSettingsManager.cs" />
     <Compile Include="Helpers\Encoder.cs" />
+    <Compile Include="Helpers\ExpressionExtensions.cs" />
     <Compile Include="Helpers\RazorConfig.cs" />
     <Compile Include="Helpers\StatusCodeHandler.cs" />
     <Compile Include="Helpers\UserMapper.cs" />
@@ -121,6 +122,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Views\admin\User.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\admin\UserEdit.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Views\admin\Usergroups.cshtml">

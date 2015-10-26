@@ -15,6 +15,15 @@
     /// </summary>
     public class User : NORMObject<User>, IUserIdentity
     {
+        public User()
+        {
+            this.Id = Guid.Empty;
+            this.UserName = string.Empty;
+            this.Email = string.Empty;
+            this.Password = string.Empty;
+            this.DateRegistered = DateTime.Now;
+        }
+
         /// <summary>
         /// The id of the user
         /// </summary>
