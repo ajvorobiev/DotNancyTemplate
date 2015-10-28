@@ -25,23 +25,23 @@
         {
             this.Before.AddItemToEndOfPipeline(ctx =>
             {
-                this.Model.MasterPage = new MasterPageModel();
+                this.Model.MasterModel = new MasterModel();
 
                 var appTitle = AppSettingsManager.ReadSetting("appname");
 
-                this.Model.MasterPage.Title = appTitle;
-                this.Model.MasterPage.AppTitle = appTitle;
+                this.Model.MasterModel.Title = appTitle;
+                this.Model.MasterModel.AppTitle = appTitle;
 
                 if (this.Request.Cookies.ContainsKey("lastvisit"))
                 {
-                    this.Model.MasterPage.LastVisit = Uri.UnescapeDataString(this.Request.Cookies["lastvisit"]);
+                    this.Model.MasterModel.LastVisit = Uri.UnescapeDataString(this.Request.Cookies["lastvisit"]);
                 }
                 else
                 {
-                    this.Model.MasterPage.LastVisit = "No cookie value yet";
+                    this.Model.MasterModel.LastVisit = "No cookie value yet";
                 }
 
-                this.Model.MasterPage.IsAuthenticated = (ctx.CurrentUser == null);
+                this.Model.MasterModel.IsAuthenticated = (ctx.CurrentUser == null);
                 return null;
             });
 

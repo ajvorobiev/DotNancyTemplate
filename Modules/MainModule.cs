@@ -19,7 +19,8 @@
 
             this.Get["/login"] = x =>
             {
-                this.Model.login = new LoginModel() { Errored = this.Request.Query.error.HasValue, ReturnUrl = this.Request.Url };
+                this.Model.MasterModel.Errored = this.Request.Query.error.HasValue;
+                this.Model.login = new LoginModel() { ReturnUrl = this.Request.Url };
                 return this.View["Login", this.Model];
             };
 

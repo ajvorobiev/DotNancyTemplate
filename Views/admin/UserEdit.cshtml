@@ -14,25 +14,33 @@ else
     <h1>Edit User: @Model.User.UserName</h1>
 }
 
-@*@if (Model.Errored)
+@if (Model.MasterModel.Errored)
 {
     <div class="row">
          <div class="col-md-12">
-             <div class="alert alert-danger" role="alert" style="padding: 10px; margin-bottom: 5px;">Invalid Username or Password</div>
+             <div class="alert alert-danger" role="alert" style="padding: 10px; margin-bottom: 25px;">
+                 The new user could not be created because of the following errors:
+                 <ul>
+                     @foreach(var error in Model.MasterModel.ErrorsList)
+                     {
+                         <li>@error</li>
+                     }
+                 </ul>
+             </div>
          </div>
     </div>
-}*@
+}
 
 <form action="/admin/users/create" method="POST">
     <table class="table table-hover">
         <tbody>
             <tr>
                 <td>Username:</td>
-                <td><input type="text" name="UserName" placeholder="UserName" class="form-control" required/></td>
+                <td><input type="text" name="UserName" placeholder="UserName" class="form-control" value="@Model.User.UserName" required/></td>
             </tr>
             <tr>
                 <td>Email:</td>
-                <td><input type="email" name="Email" placeholder="Email" class="form-control" required/></td>
+                <td><input type="email" name="Email" placeholder="Email" class="form-control" value="@Model.User.Email" required/></td>
             </tr>
         <tr>
             <td>Password:</td>
@@ -48,7 +56,21 @@ else
                 <select class="form-control" name="Usergroup">
                     @foreach(var usergroup in Model.Usergroups)
                     {
-                        <option value="@usergroup.Id">@usergroup.Name</option>
+                        @if(Model.User.Usergroup != null)
+                         {
+                             @if(Model.User.Usergroup.Id != usergroup.Id)
+                              {
+                                  <option value="@usergroup.Id">@usergroup.Name</option>
+                              }
+                              else
+                              {
+                                  <option value="@usergroup.Id" selected>@usergroup.Name</option>
+                              }
+                        }
+                        else
+                        {
+                            <option value="@usergroup.Id">@usergroup.Name</option>
+                        }
                     }
                 </select>
             </td>

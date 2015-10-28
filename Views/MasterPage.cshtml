@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>@Model.MasterPage.Title</title>
+    <title>@Model.MasterModel.Title</title>
     <link rel="stylesheet" type="text/css" href="/Content/bootstrap.min.css"/>
     @RenderSection("Scripts", required: false)
 </head>
@@ -13,16 +13,16 @@
 
     <div class="masthead clearfix">
         <div class="inner">
-            <h3 class="masthead-brand">@Model.MasterPage.AppTitle</h3>
+            <h3 class="masthead-brand">@Model.MasterModel.AppTitle</h3>
             <nav>
                 <ul class="nav masthead-nav">
                     <li class="active"><a href="/">Home</a></li>
                     <li>
-                        @if (Model.MasterPage.IsAuthenticated)
+                        @if (Model.MasterModel.IsAuthenticated)
                         { 
                             <a href="/login">Login</a>
                         }
-                        @if(!Model.MasterPage.IsAuthenticated)
+                        @if(!Model.MasterModel.IsAuthenticated)
                         {
                             <form id="logoutform" method="post" action="/logout">
                                 <input type=submit value="Logout"/>

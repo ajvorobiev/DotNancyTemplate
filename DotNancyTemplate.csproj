@@ -96,7 +96,7 @@
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\MasterPageModel.cs" />
+    <Compile Include="Models\MasterModel.cs" />
     <Compile Include="Modules\AdminModule.cs" />
     <Compile Include="Modules\BaseModule.cs" />
     <Compile Include="Modules\MainModule.cs" />
@@ -160,6 +160,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\font\fontawesome-webfont.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\MyAppStyle.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="NLog.config">
