@@ -7,25 +7,37 @@
 
     <h1>Usergroups</h1>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Claims</th>
-            </tr>
-        <thead>
-        <tbody>
-            @foreach(var group in Model.Usergroups.AllGroups)
-            {
-            <tr>
-                <td><a href="/admin/usergroups/@group.Id">@group.Name</a></td>
-                <td>@group.ClaimsList</td>
-            </tr>
-            }
-        </tbody>
-    </table>
-    
-    <h1>Claims Overview</h1>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Claims</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <thead>
+    <tbody>
+    @foreach(var group in Model.Usergroups.AllGroups)
+    {
+        <tr>
+            <td><a href="/admin/usergroups/@group.Id">@group.Name</a></td>
+            <td>@group.ClaimsList</td>
+            <td><a href="/admin/usergroups/@group.Id/edit"><i class="fa fa-pencil-square fa-3x"></i></a></td>
+            <td>
+                <form action="/admin/usergroups/@group.Id/remove" method="POST"><button class="btn btn-danger" type="submit"><i class="fa fa-times"></i></button>
+                </form>
+
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<a href="/admin/usergroups/create" class="btn btn-success">
+    <i class="fa fa-user-plus"></i>&nbsp;New Usergroup
+</a>
+
+<h1>Claims Overview</h1>
 
     <table class="table table-hover">
         <thead>

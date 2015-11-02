@@ -11,74 +11,70 @@
 }
 else
 {
-    <h1>Edit User: @Model.User.UserName</h1>
+    <h1>Editing User: @Model.User.UserName</h1>
 }
 
-@if (Model.MasterModel.Errored)
-{
-    <div class="row">
-         <div class="col-md-12">
-             <div class="alert alert-danger" role="alert" style="padding: 10px; margin-bottom: 25px;">
-                 The new user could not be created because of the following errors:
-                 <ul>
-                     @foreach(var error in Model.MasterModel.ErrorsList)
-                     {
-                         <li>@error</li>
-                     }
-                 </ul>
-             </div>
-         </div>
-    </div>
+
+
+@{
+    var route = "/admin/users/create";
+
+    if(Model.User.Id != Guid.Empty)
+    {
+        route = "/admin/users/" + Model.User.Id + "/update";
+    }
 }
 
-<form action="/admin/users/create" method="POST">
-    <table class="table table-hover">
-        <tbody>
-            <tr>
-                <td>Username:</td>
-                <td><input type="text" name="UserName" placeholder="UserName" class="form-control" value="@Model.User.UserName" required/></td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td><input type="email" name="Email" placeholder="Email" class="form-control" value="@Model.User.Email" required/></td>
-            </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type="password" name="Password" placeholder="Password" class="form-control" required="true"/></td>
-        </tr>
-            <tr>
-                <td>Repeat Password:</td>
-                <td><input type="password" name="PasswordValidation" placeholder="Repeat Password" class="form-control" required="true" /></td>
-            </tr>
-        <tr>
-            <td>Usergroup:</td>
-            <td>
-                <select class="form-control" name="Usergroup">
-                    @foreach(var usergroup in Model.Usergroups)
-                    {
-                        @if(Model.User.Usergroup != null)
-                         {
-                             @if(Model.User.Usergroup.Id != usergroup.Id)
-                              {
-                                  <option value="@usergroup.Id">@usergroup.Name</option>
-                              }
-                              else
-                              {
-                                  <option value="@usergroup.Id" selected>@usergroup.Name</option>
-                              }
-                        }
-                        else
-                        {
-                            <option value="@usergroup.Id">@usergroup.Name</option>
-                        }
-                    }
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input class="btn btn-success" type="submit" value="Register Me" /></td>
-        </tr>
-        </tbody>
-    </table>
-</form>
+
+<form action="@route" method="POST">
+
+        <table class="table table-hover">
+            <tbody>
+                <tr>
+                    <td>Username:</td>
+                    <td><input type="text" name="UserName" placeholder="UserName" class="form-control" value="@Model.User.UserName" required /></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="email" name="Email" placeholder="Email" class="form-control" value="@Model.User.Email" required /></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="Password" placeholder="Password" class="form-control" /></td>
+                </tr>
+                <tr>
+                    <td>Repeat Password:</td>
+                    <td><input type="password" name="PasswordValidation" placeholder="Repeat Password" class="form-control" /></td>
+                </tr>
+                <tr>
+                    <td>Usergroup:</td>
+                    <td>
+                        <select class="form-control" name="Usergroup">
+                            @foreach (var usergroup in Model.Usergroups)
+                            {
+                                @if (Model.User.Usergroup != null)
+                                {
+                                    @if (Model.User.Usergroup.Id != usergroup.Id)
+                                    {
+                                        <option value="@usergroup.Id">@usergroup.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@usergroup.Id" selected>@usergroup.Name</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="@usergroup.Id">@usergroup.Name</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input class="btn btn-success" type="submit" value="Save" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>

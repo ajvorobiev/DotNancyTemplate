@@ -67,6 +67,8 @@
                     UsergroupId = usergroup
                 };
 
+                newUser.EncodePassword();
+
                 var allUsers = User.All();
 
                 if (string.IsNullOrWhiteSpace(newUser.UserName))
@@ -117,9 +119,92 @@
                 return this.Response.AsRedirect("/admin/users");
             };
 
+            this.Get["/users/{id:guid}/edit"] = x =>
+            {
+                var user = User.Find(Guid.Parse(x.id));
+
+                if (user == null)
+                {
+                    return HttpStatusCode.NotFound;
+                }
+
+                this.Model.User = user;
+                this.Model.Usergroups = Usergroup.All();
+
+                return this.View["admin/UserEdit", this.Model];
+            };
+
             this.Post["/users/{id:guid}/update"] = x =>
             {
-                throw new HttpRequestException("Not implemented yet.");
+                // do the save
+                var username = (string)this.Request.Form.UserName;
+                var email = (string)this.Request.Form.Email;
+                var password = (string)this.Request.Form.Password;
+                var passwordValid = (string)this.Request.Form.PasswordValidation;
+                var usergroup = Guid.Parse((string)this.Request.Form.Usergroup);
+
+                var master = (MasterModel)this.Model.MasterModel;
+                master.Errored = false;
+                master.ErrorsList.Clear();
+
+                var oldUser = User.Find((Guid) x.Id);
+
+                var allUsers = User.All();
+
+
+                if (string.IsNullOrWhiteSpace(username))
+                {
+                    master.ErrorsList.Add("The username must not be empty.");
+                }
+
+                if (allUsers.Any(u => u.UserName.Equals(username) && !u.UserName.Equals(oldUser.UserName)))
+                {
+                    master.ErrorsList.Add("The provided username is already taken.");
+                }
+
+                oldUser.UserName = username;
+
+                if (string.IsNullOrWhiteSpace(oldUser.Email))
+                {
+                    master.ErrorsList.Add("The email must not be empty.");
+                }
+
+                if (allUsers.Any(u => !u.Email.Equals(oldUser.Email) && u.Email.Equals(email)))
+                {
+                    master.ErrorsList.Add("The provided email is already taken.");
+                }
+
+                oldUser.Email = email;
+
+                if (!string.IsNullOrWhiteSpace(password))
+                {
+                    if(!password.Equals(passwordValid))
+                    {
+                        master.ErrorsList.Add("The passwords do not match.");
+                    }
+                    else
+                    {
+                        oldUser.Password = password;
+                        oldUser.EncodePassword();
+                    }
+                }
+
+                oldUser.UsergroupId = usergroup;
+
+                // save
+                if (master.ErrorsList.Any())
+                {
+                    master.Errored = true;
+                    this.Model.User = oldUser;
+                    this.Model.Usergroups = Usergroup.All();
+                    var u = this.BindTo(oldUser, "Password");
+                    return this.View["admin/UserEdit", this.Model];
+                }
+
+                oldUser.Save();
+                
+                // redirect to the list
+                return this.Response.AsRedirect("/admin/users");
             };
 
             this.Post["/users/{id:guid}/remove"] = x =>

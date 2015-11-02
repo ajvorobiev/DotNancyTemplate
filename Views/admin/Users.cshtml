@@ -16,7 +16,8 @@
         <th>Email</th>
         <th>Date Registered</th>
         <th>Group</th>
-        <th>Actions</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     <thead>
     <tbody>
@@ -27,13 +28,13 @@
             <td>@user.Email</td>
             <td>@user.DateRegistered</td>
             <td><a href="/admin/usergroups/@user.Usergroup.Id">@user.Usergroup.Name</a></td>
-            <td><a href="/admin/users/@user.Id/edit"><i class="fa fa-pencil-square fa-3x"></i></a>
-
-                            @if (((dynamic)Html.CurrentUser).Id != user.Id)
-                            {
-                                <form action="/admin/users/@user.Id/remove" method="POST"><button class="btn btn-danger" type="submit"><i class="fa fa-times"></i></button></form>
-                            }
-</td>
+            <td><a href="/admin/users/@user.Id/edit"><i class="fa fa-pencil-square fa-3x"></i></a></td>
+            <td>
+            @if (((dynamic)Html.CurrentUser).Id != user.Id)
+            {
+                <form action="/admin/users/@user.Id/remove" method="POST"><button class="btn btn-danger" type="submit"><i class="fa fa-times"></i></button></form>
+            }
+            </td>
         </tr>
     }
     </tbody>
