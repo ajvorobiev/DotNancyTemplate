@@ -127,6 +127,9 @@
     <None Include="Views\admin\UserEdit.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Views\admin\UsergroupEdit.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Views\admin\Usergroups.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

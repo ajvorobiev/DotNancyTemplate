@@ -44,10 +44,10 @@
                 return this.View["admin/UsergroupEdit", this.Model];
             };
 
-            this.Post["/usergroupss/create"] = x =>
+            this.Post["/usergroups/create"] = x =>
             {
                 // do the save
-                var name = (string)this.Request.Form.UserName;
+                var name = (string)this.Request.Form.Name;
                 var claims = (string)this.Request.Form.Claims;
                 
                 var master = (MasterModel)this.Model.MasterModel;
@@ -72,6 +72,9 @@
                     master.ErrorsList.Add("The provided name is already taken.");
                 }
 
+                // set the claims
+                newUsergroup.Claims = claims.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList().Select(Guid.Parse).ToList();
+                
                 // save
 
                 if (master.ErrorsList.Any())
@@ -130,6 +133,8 @@
                 }
 
                 oldUsergroup.Name = name;
+
+                oldUsergroup.Claims = claims.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList().Select(Guid.Parse).ToList();
                 
                 // save
                 if (master.ErrorsList.Any())

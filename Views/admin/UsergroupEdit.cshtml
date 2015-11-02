@@ -1,0 +1,57 @@
+﻿@using System
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+@{
+    Layout = "AdminMasterPage.cshtml";
+}
+
+@if (Model.Usergroup.Id == Guid.Empty)
+{
+    <h1>Create Usergroup</h1>
+}
+else
+{
+    <h1>Editing Usergroup: @Model.Usergroup.Name</h1>
+}
+
+@{
+    var route = "/admin/usergroups/create";
+
+    if (Model.Usergroup.Id != Guid.Empty)
+    {
+        route = "/admin/usergroups/" + Model.Usergroup.Id + "/update";
+    }
+}
+
+<form action="@route" method="POST">
+
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" name="Name" placeholder="Name" class="form-control" value="@Model.Usergroup.Name" required /></td>
+            </tr>
+            <tr>
+                <td>Claims:</td>
+                <td>
+                    @foreach (var claim in Model.Claims)
+                    {
+                        @if (Model.Usergroup.Id != Guid.Empty && Model.Usergroup.Claims.Contains(claim.Id))
+                        {
+                            <input type="checkbox" name="Claims" value="@claim.Id" checked/> @claim.Name <br />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="Claims" value="@claim.Id" /> @claim.Name <br />
+                        }
+
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input class="btn btn-success" type="submit" value="Save" /></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
